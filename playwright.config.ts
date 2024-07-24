@@ -50,8 +50,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     storageState: '/storage-state/storageState.json',
   },
- // globalSetup: require.resolve('./globals/global-setup'),
-//  globalTeardown: require.resolve('./globals/global-teardown'),
+  globalSetup: require.resolve('./globals/global-setup'),
+  globalTeardown: require.resolve('./globals/global-teardown'),
    /* Configure projects for major browsers */
   projects: [
     {
