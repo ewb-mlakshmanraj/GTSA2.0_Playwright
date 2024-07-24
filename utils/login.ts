@@ -7,7 +7,6 @@ async function login(
   password: string,
 
 ): Promise<void> {
-  console.log("-----"+orgurl)
   await page.goto(orgurl);
   if(!isElementVisible(page, "GTSA - US - Search Dashboard")){
   await page.getByPlaceholder('Email, phone, or Skype').click();
