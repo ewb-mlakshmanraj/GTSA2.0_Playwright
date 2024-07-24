@@ -50,7 +50,6 @@ const profileID:any= process.env.PROFILEID?.toString();
     await allure.severity(Severity.CRITICAL);
     await allure.link("https://example.com/docs", "Related Documentation");
     await allure.issue("AUTH-123", "https://example.com/issues/AUTH-123");
-    await allure.tms("TMS-456", "https://example.com/tms/TMS-456");
     
   });
   
@@ -64,7 +63,6 @@ const profileID:any= process.env.PROFILEID?.toString();
     await frame.locator(stringFormat(gtsaUSSearchDashboard.btnSearch)).click();
     await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'attached'});
     await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'visible'});
-    page.on('dialog', dialog => console.log('---- dialig '+dialog.message()));
     await expect(page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton'))).toHaveText("Ok", { timeout: 10000 });
     await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).click();
     await frame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Create New Profile')).scrollIntoViewIfNeeded();
@@ -78,9 +76,6 @@ const profileID:any= process.env.PROFILEID?.toString();
     await page.locator(stringFormat(gtsaCommonComponents.DynamicButton,'menuitem','Add Accounts')).click();
     await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubMenuSelector,'menu','Add Accounts')).click();
     await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
-    console.log('Row billing account  element'+stringFormat(gridSelectors.GridRowsColumnInputSector,'1','10'));
-    console.log('Row billing account  element'+stringFormat(gridSelectors.GridRowsColumnInputSector,'1','1'));
-    console.log('Row billing account  element'+stringFormat(gridSelectors.GridRowsColumnInputSector,'3','1'));
     const accountFrame=page.frameLocator(stringFormat(gtsaUSSearchDashboard.frmDashboard,'MscrmControls.WebResource.WebResourceHtmlControl-FullPageWebResource'));
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'1','10')).waitFor({state:'visible'});
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'4','10')).click(); 
@@ -122,8 +117,6 @@ const profileID:any= process.env.PROFILEID?.toString();
     await page.locator(stringFormat(FormControlSelectors.PhoneTextBox,'ewb_administratorphone')).fill('123456');
     await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubAreaMenuSelector,'Commands','Save & Close')).click();
     //Generate PDF
-
-    
     //const screenshot =await this.page.screenshot({ path: 'screenshot.png', fullPage: true });
     //testinfo.attach(testinfo.title,{ body: screenshot, contentType: 'image/png'} );
     
@@ -136,7 +129,5 @@ const profileID:any= process.env.PROFILEID?.toString();
     await allure.severity(Severity.CRITICAL);
     await allure.link("https://example.com/docs", "Related Documentation");
     await allure.issue("AUTH-123", "https://example.com/issues/AUTH-123");
-    await allure.tms("TMS-456", "https://example.com/tms/TMS-456");
   });
-
 });
