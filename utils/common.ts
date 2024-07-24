@@ -171,18 +171,13 @@ export async function isElementVisible(page:Page,txt:string):Promise<boolean>{
 export async function getCSVData(testCaseName:string,CSVfileName:string):Promise<any>{
 	let testCaseData;
 	const testDatas = parse(fs.readFileSync(path.join(__dirname, '..','testdata/'+process.env.DYN365_Env+'/'+CSVfileName+'.csv')), {		
-
 	columns: true,
 		skip_empty_lines: true
 	  });
 	 for(const testData of testDatas){
-		console.log("test case name form test case "+testCaseName.toLowerCase());
-		console.log("test case name form csv"+testData.test_case);
    if(testCaseName.toLowerCase().localeCompare(testData.test_case.toLowerCase())==0){
 	testCaseData=testData;
-	
-	console.log("Tets data inside test case "+testCaseData.test_case)
      }
 	 }
-	  return testCaseData
+	 return JSON.stringify(testCaseData);
 }
