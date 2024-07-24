@@ -1,0 +1,27 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@playwright/test": "^1.43.1",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^18.14.5",
+    "allure-commandline": "^2.29.0",
+    "allure-playwright": "^2.15.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.57.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
+  },
+  "dependencies": {
+    "allure": "^0.0.0",
+    "csv-parse": "^5.5.6"
+  }
+}
