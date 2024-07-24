@@ -23,11 +23,8 @@ export async function waitUntilAppIdle(page: Page) {
 }
 
 export async function navigateToApps(page: Page, appId: string, appName:string){
-	
-   console.log('Navigate to ' + appName.toString() + ' - Start');
    await page.goto('/main.aspx?appid=' + appId.toString() );
    expect(page.getByRole('button', { name: appName })).toBeTruthy();
-   console.log('Navigated to ' +  appName.toString() + '- Success');
 }
 
 /**
