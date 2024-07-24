@@ -179,11 +179,10 @@ export async function getCSVData(testCaseName:string,CSVfileName:string):Promise
 		console.log("test case name form test case "+testCaseName.toLowerCase());
 		console.log("test case name form csv"+testData.test_case);
    if(testCaseName.toLowerCase().localeCompare(testData.test_case.toLowerCase())==0){
-	console.log("Type of test data --->"+typeof testData);
 	testCaseData=testData;
 	
 	console.log("Tets data inside test case "+testCaseData.test_case)
      }
 	 }
-	  return JSON.stringify(testCaseData);
+	  return testCaseData
 }
