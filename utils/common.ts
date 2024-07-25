@@ -1,5 +1,5 @@
 import { expect, Page } from "@playwright/test";
-import {  CommandBarGlobalButtonsSelectors, FormSelectors} from "../selectors/GTSA2.0Selectors.json";
+import {  CommandBarGlobalButtonsSelectors, FormSelectors} from "../selectors/PowerAppsSelectors.json";
 import path from "path";
 import fs from 'fs';
 import { parse } from "csv-parse/sync";

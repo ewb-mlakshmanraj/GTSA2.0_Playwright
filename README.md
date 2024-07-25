@@ -1,4 +1,4 @@
-<h2>GTSA 2.0 Playwright Automation Framework</h2>
+<h2>Microsoft Dynamics 365 Playwright Automation Framework</h2>
 
 <h3>Install Playwright & Select Configurations</h3>
 <p></p>npm init playwright@latest

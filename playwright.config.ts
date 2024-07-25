@@ -29,7 +29,7 @@ export default defineConfig({
   ['allure-playwright',
   {
     detail: true,
-    outputFolder: "my-allure-results",
+    outputFolder: "allure-results",
     suiteTitle: false,
   },
 ]
@@ -43,8 +43,8 @@ export default defineConfig({
     baseURL: process.env.DYN365_ORGURL,
     screenshot: 'on',
     httpCredentials: {
-      username: 'mlaxmanraj',
-      password: 'Thangam@123456',
+      username: 'httpuser',
+      password: 'httppassword',
     },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',

@@ -13,8 +13,8 @@
 import { test, expect, type Page } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
-import { gtsaUSSearchDashboard,gtsaAlertWindow,gtsaCommonComponents,gtsaListSelector,subAreaMenuSelectors, viewSelectors, 
-  gridSelectors, FormControlSelectors} from "../selectors/GTSA2.0Selectors.json";
+import { PowerAppsUSSearchDashboard,PowerAppsAlertWindow,PowerAppsCommonComponents,PowerAppsListSelector,subAreaMenuSelectors, viewSelectors, 
+  gridSelectors, FormControlSelectors} from "../selectors/PowerAppsSelectors.json";
 import { getCSVData, navigateToApps, stringFormat, waitUntilAppIdle } from '../utils/common';
 import { allure } from 'allure-playwright';
 import { Severity } from "allure-js-commons";
@@ -31,16 +31,16 @@ const profileID:any= process.env.PROFILEID?.toString();
   test('01.Search for ACI migrated Profile', async ({ page },testInfo) => {
   //Search for profile
     await waitUntilAppIdle(page);
-    const frame =page.frameLocator(stringFormat(gtsaUSSearchDashboard.frmDashboard,'WebResource_WebResource_bobauscustomersearch-'));
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.btnCompanyID)).click();
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.ddCompanyId)).click();
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.txtSearchCustomerInput)).fill(profileID);
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.btnSearch)).click();
-    await expect(frame.locator(stringFormat(gtsaUSSearchDashboard.tblCompanyId))).toHaveText(profileID, { timeout: 10000 });
+    const frame =page.frameLocator(stringFormat(PowerAppsUSSearchDashboard.frmDashboard,'WebResource_WebResource_bobauscustomersearch-'));
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.btnCompanyID)).click();
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.ddCompanyId)).click();
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.txtSearchCustomerInput)).fill(profileID);
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.btnSearch)).click();
+    await expect(frame.locator(stringFormat(PowerAppsUSSearchDashboard.tblCompanyId))).toHaveText(profileID, { timeout: 10000 });
     //const screenshot =await this.page.screenshot({ path: 'screenshot.png', fullPage: true });
   //  testinfo.attach(testinfo.title,{ body: screenshot, contentType: 'image/png'} );
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.tblCompanyId)).waitFor({state:'visible'});
-    let profileDetails = frame.locator(stringFormat(gtsaUSSearchDashboard.tblCompanyId));
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.tblCompanyId)).waitFor({state:'visible'});
+    let profileDetails = frame.locator(stringFormat(PowerAppsUSSearchDashboard.tblCompanyId));
     await profileDetails.waitFor({state:'attached'});
     await allure.description(
       "GTSA 2.0 maintenance company id search.",
@@ -58,58 +58,58 @@ const profileID:any= process.env.PROFILEID?.toString();
     await getCSVData(testInfo.title,'testcase').then((value)=>{testData =JSON.parse(value)});
     //Create profile
     await waitUntilAppIdle(page);
-    const frame =page.frameLocator(stringFormat(gtsaUSSearchDashboard.frmDashboard,'WebResource_WebResource_bobauscustomersearch-'));
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.txtSearchCustomerInput)).fill(customerID);
-    await frame.locator(stringFormat(gtsaUSSearchDashboard.btnSearch)).click();
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'attached'});
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'visible'});
-    await expect(page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton'))).toHaveText("Ok", { timeout: 10000 });
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).click();
-    await frame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Create New Profile')).scrollIntoViewIfNeeded();
-    await frame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Create New Profile')).waitFor({state:'visible'});
-    await frame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Create New Profile')).click();
-    await page.locator(stringFormat(gtsaListSelector.TabList,'eForm Form','Company Entitlements')).waitFor({state:'visible'}); 
+    const frame =page.frameLocator(stringFormat(PowerAppsUSSearchDashboard.frmDashboard,'WebResource_WebResource_bobauscustomersearch-'));
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.txtSearchCustomerInput)).fill(customerID);
+    await frame.locator(stringFormat(PowerAppsUSSearchDashboard.btnSearch)).click();
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'attached'});
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton')).waitFor({state:'visible'});
+    await expect(page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton'))).toHaveText("Ok", { timeout: 10000 });
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton')).click();
+    await frame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Create New Profile')).scrollIntoViewIfNeeded();
+    await frame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Create New Profile')).waitFor({state:'visible'});
+    await frame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Create New Profile')).click();
+    await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Company Entitlements')).waitFor({state:'visible'}); 
     await page.locator(stringFormat(FormControlSelectors.OptionSet,'ewb_businesspackages')).click();
-    await page.locator(stringFormat(gtsaListSelector.DivSelectBox,'listbox','option','Standard')).click();
+    await page.locator(stringFormat(PowerAppsListSelector.DivSelectBox,'listbox','option','Standard')).click();
     //Account Entitlement
-    await page.locator(stringFormat(gtsaListSelector.TabList,'eForm Form','Account Entitlements')).click();
-    await page.locator(stringFormat(gtsaCommonComponents.DynamicButton,'menuitem','Add Accounts')).click();
-    await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubMenuSelector,'menu','Add Accounts')).click();
-    await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
-    const accountFrame=page.frameLocator(stringFormat(gtsaUSSearchDashboard.frmDashboard,'MscrmControls.WebResource.WebResourceHtmlControl-FullPageWebResource'));
+    await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Account Entitlements')).click();
+    await page.locator(stringFormat(PowerAppsCommonComponents.DynamicButton,'menuitem','Add Accounts')).click();
+    //await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubMenuSelector,'menu','Add Accounts')).click();
+    await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
+    const accountFrame=page.frameLocator(stringFormat(PowerAppsUSSearchDashboard.frmDashboard,'MscrmControls.WebResource.WebResourceHtmlControl-FullPageWebResource'));
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'1','10')).waitFor({state:'visible'});
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'4','10')).click(); 
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'confirmdialog','confirmButton')).click();
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).click();
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'confirmdialog','confirmButton')).click();
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton')).click();
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'1','2')).click();
     await accountFrame.locator(stringFormat(gridSelectors.GridRowsColumnInputSector,'3','2')).click(); 
-    await accountFrame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Add Account Entitlements')).scrollIntoViewIfNeeded();
-    await accountFrame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Add Account Entitlements')).waitFor({state:'attached'});
-    await accountFrame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Add Account Entitlements')).waitFor({state:'visible'});
-    await accountFrame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Add Account Entitlements')).click();
-    await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
-    await page.locator(stringFormat(gtsaAlertWindow.AlertButton,'alertdialog','okButton')).click();
-    await accountFrame.locator(stringFormat(gtsaCommonComponents.StaticButton,'Close')).click();
-    await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
-    if(await page.locator(stringFormat(gtsaListSelector.TabList,'eForm Form','Online Administrator')).isHidden()){
+    await accountFrame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Add Account Entitlements')).scrollIntoViewIfNeeded();
+    await accountFrame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Add Account Entitlements')).waitFor({state:'attached'});
+    await accountFrame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Add Account Entitlements')).waitFor({state:'visible'});
+    await accountFrame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Add Account Entitlements')).click();
+    await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
+    await page.locator(stringFormat(PowerAppsAlertWindow.AlertButton,'alertdialog','okButton')).click();
+    await accountFrame.locator(stringFormat(PowerAppsCommonComponents.StaticButton,'Close')).click();
+    await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
+    if(await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Online Administrator')).isHidden()){
       console.log("Online admin is Hidded")
-      await page.locator(stringFormat(gtsaListSelector.TabList,'eForm Form','More Tabs')).click();
-      await page.locator(stringFormat(gtsaListSelector.DivMenuBox,'menu','menuitem','Online Administrator')).click();
+      await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','More Tabs')).click();
+      await page.locator(stringFormat(PowerAppsListSelector.DivMenuBox,'menu','menuitem','Online Administrator')).click();
     }
     else{
-      await page.locator(stringFormat(gtsaListSelector.TabList,'eForm Form','Online Administrator')).click();
+      await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Online Administrator')).click();
     }
       //Adding user details
-    await page.locator(stringFormat(gtsaCommonComponents.DynamicButton,'menuitem','New User. Add New User')).click();
-    await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
+    await page.locator(stringFormat(PowerAppsCommonComponents.DynamicButton,'menuitem','New User. Add New User')).click();
+    await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
     await page.locator(stringFormat(FormControlSelectors.TextBox,'ewb_firstname')).fill(testData.User1_FirstName);
     await page.locator(stringFormat(FormControlSelectors.TextBox,'ewb_lastname')).fill(testData.User1_LastName);
     await page.locator(stringFormat(FormControlSelectors.MailTextBox,'ewb_administratoremailaddress')).fill(testData.User1_Email);
     await page.locator(stringFormat(FormControlSelectors.ToggleContainer,'ewb_signer')).click();
     await page.locator(stringFormat(FormControlSelectors.PhoneTextBox,'ewb_administratorphone')).fill(testData.User1_PhoneNumer_1);
     await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubAreaMenuSelector,'Commands','Save & Close')).click();
-    await page.waitForSelector(stringFormat(gtsaCommonComponents.SpinnerSelector),{state:'hidden'});
-    await page.locator(stringFormat(gtsaCommonComponents.DynamicButton,'menuitem','New User. Add New User')).click();
+    await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
+    await page.locator(stringFormat(PowerAppsCommonComponents.DynamicButton,'menuitem','New User. Add New User')).click();
     await page.locator(stringFormat(FormControlSelectors.TextBox,'ewb_firstname')).fill('Second User');
     await page.locator(stringFormat(FormControlSelectors.TextBox,'ewb_lastname')).fill('4Last Name');
     await page.locator(stringFormat(FormControlSelectors.MailTextBox,'ewb_administratoremailaddress')).fill('email2@gmail.com');
