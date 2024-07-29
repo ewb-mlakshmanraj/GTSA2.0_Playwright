@@ -18,6 +18,7 @@ import { PowerAppsUSSearchDashboard,PowerAppsAlertWindow,PowerAppsCommonComponen
 import { getCSVData, navigateToApps, stringFormat, waitUntilAppIdle } from '../utils/common';
 import { allure } from 'allure-playwright';
 import { Severity } from "allure-js-commons";
+import { addAccount } from '../selectors/testcommonfunction/eform';
 
 const customerID:any= process.env.CUSTOMERID?.toString();
 const profileID:any= process.env.PROFILEID?.toString();
@@ -72,7 +73,8 @@ const profileID:any= process.env.PROFILEID?.toString();
     await page.locator(stringFormat(FormControlSelectors.OptionSet,'ewb_businesspackages')).click();
     await page.locator(stringFormat(PowerAppsListSelector.DivSelectBox,'listbox','option','Standard')).click();
     //Account Entitlement
-    await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Account Entitlements')).click();
+    addAccount(page);
+   /* await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Account Entitlements')).click();
     await page.locator(stringFormat(PowerAppsCommonComponents.DynamicButton,'menuitem','Add Accounts')).click();
     //await page.locator(stringFormat(subAreaMenuSelectors.DynamicSubMenuSelector,'menu','Add Accounts')).click();
     await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
@@ -99,6 +101,7 @@ const profileID:any= process.env.PROFILEID?.toString();
     else{
       await page.locator(stringFormat(PowerAppsListSelector.MenuTabList,'eForm Form','Online Administrator')).click();
     }
+      */
       //Adding user details
     await page.locator(stringFormat(PowerAppsCommonComponents.DynamicButton,'menuitem','New User. Add New User')).click();
     await page.waitForSelector(stringFormat(PowerAppsCommonComponents.SpinnerSelector),{state:'hidden'});
